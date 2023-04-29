@@ -20,4 +20,25 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productRepository.getAllProducts();
     }
+
+    public Product saveProduct(Product product) {
+        productRepository.saveProduct(product);
+        return product;
+    }
+
+    public Product getProductById(String id) {
+        return productRepository.findProductById(id);
+    }
+
+    public boolean isProductPresent(String  id) {
+        return productRepository.checkProductPresent(id);
+    }
+
+    public int updateProduct(boolean status, String id) {
+        return productRepository.updateProduct(status, id);
+    }
+
+    public void deleteProduct(String id) {
+        productRepository.deleteProduct(id);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProductRepository implements ProductRepositoryContract{
@@ -31,8 +32,10 @@ public class ProductRepository implements ProductRepositoryContract{
     }
 
     @Override
-    public Void saveProduct(Product product) {
-        return null;
+    public Product saveProduct(Product product) {
+        ProductEntity productEntity = productMapper.toProductEntity(product);
+        productCrudRepository.save(productEntity);
+        return product;
     }
 
     @Override
@@ -41,12 +44,21 @@ public class ProductRepository implements ProductRepositoryContract{
     }
 
     @Override
-    public Product deleteProduct(long id) {
-        return null;
+    public Product findProductById(String id) {
+        ProductEntity searchedProduct = productCrudRepository.findById(id).get();
+        return productMapper.toProduct(searchedProduct);
     }
 
-    @Override
-    public Product findProductById(long id) {
-        return null;
+    public boolean checkProductPresent(String id) {
+        Optional<ProductEntity> product = productCrudRepository.findById(id);
+        return product.isPresent();
+    }
+
+    public int updateProduct(boolean isActive, String id) {
+        return productCrudRepository.updateProductStatus(isActive, id);
+    }
+
+    public void deleteProduct(String id) {
+        productCrudRepository.deleteById(id);
     }
 }

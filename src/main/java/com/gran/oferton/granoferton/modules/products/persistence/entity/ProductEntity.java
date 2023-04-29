@@ -1,9 +1,7 @@
 package com.gran.oferton.granoferton.modules.products.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "productos")
@@ -16,6 +14,7 @@ public class ProductEntity {
 
     private Double price;
 
+    @Nullable
     @Column(name = "image_url")
     private String imageUrl;
     private Long stock;
@@ -29,9 +28,30 @@ public class ProductEntity {
     }
 
     @Column(name = "is_promo")
+    @Nullable
     private Boolean isPromotion;
 
+    @Nullable
     private String description;
+
+    @Column(name = "is_active")
+    private Boolean isActive;
+
+    public Boolean getPromotion() {
+        return isPromotion;
+    }
+
+    public void setPromotion(Boolean promotion) {
+        isPromotion = promotion;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean active) {
+        isActive = active;
+    }
 
     public String getId() {
         return id;

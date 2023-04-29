@@ -6,9 +6,12 @@ import java.util.List;
 
 public interface ProductRepositoryContract {
 
-    public Product findProductById(long id);
+    public Product findProductById(String id);
     public List<Product> getAllProducts();
-    public Void saveProduct(Product product);
+    public Product saveProduct(Product product);
     public Product updateProduct(Product newProduct);
-    public Product deleteProduct(long id);
+    public boolean checkProductPresent(String id);
+    public int updateProduct(boolean isActive, String id);
+
+    public void deleteProduct(String id);
 }

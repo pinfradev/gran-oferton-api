@@ -1,6 +1,6 @@
 package com.gran.oferton.granoferton.modules.products.domain.dto;
 
-public class Product {
+public class Product implements ProductResponse {
 
     private String id;
 
@@ -14,6 +14,23 @@ public class Product {
 
     private String description;
 
+    private boolean isActive;
+
+    public boolean isPromotion() {
+        return isPromotion;
+    }
+
+    public void setPromotion(boolean promotion) {
+        isPromotion = promotion;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean active) {
+        isActive = active;
+    }
 
     public String getId() {
         return id;
