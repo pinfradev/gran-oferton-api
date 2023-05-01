@@ -7,6 +7,7 @@ import com.gran.oferton.granoferton.modules.products.domain.service.ProductServi
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/products")
 public class ProductsController {
 
@@ -70,7 +72,9 @@ public class ProductsController {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+
     @PatchMapping(path = "/modify/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity modifyProductActiveState(@RequestParam(name = "is_active") boolean isActive, @PathVariable String id) {
         if (!productsService.isProductPresent(id)) {
             return new ResponseEntity<>(new ProductFailureResponse("error", "id no encontrado"), HttpStatus.NOT_FOUND);
